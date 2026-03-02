@@ -1,8 +1,8 @@
 class Decode:
-    def __init__(self, cypher, key = None, flag_header = "flag{"):
+    def __init__(self, cypher, key = None, flag_header = "flag"):
         self.c = cypher
         self.k = key
-        self.fh = flag_header
+        self.fh = flag_header.split("{")[0]
     
     def clean(self):
         self.c = "".join(self.c.split()).replace(",","")
@@ -47,14 +47,12 @@ class Decode:
     
     def xor(self):
         self.clean()
-        if not self.k:
-            print("xor解码需要密钥")
-            return
+        
         
     def _find_flag(self, m):
-        if self.fh and self.fh in m:
+        if self.fh in m and "}" in m and "{" in m:
                     print("找到flag:")
-                    flag = self.fh + m.split("{")[1].split("}")[0]
+                    flag = self.fh + "{" + m.split("{")[1].split("}")[0] + "}"
                     print(f"{flag}")
         else:
-            print("未找到flag, 可能需要多次嵌套解码")
+            print("尝试后未找到flag, 可能需要多次嵌套解码")
