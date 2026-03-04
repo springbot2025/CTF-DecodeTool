@@ -2,7 +2,7 @@
 
 ## 1.0版本
 
-- 支持base64,hex,binary等简单解密
+- 支持base64,hex,binary等简单编码转换
 - 支持flag自动搜索
 - 一些简单的错误处理，如错误的base64编码形式处理（补全padding），flag头输入自动去掉"{"等等
 
