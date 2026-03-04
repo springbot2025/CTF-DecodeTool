@@ -7,40 +7,41 @@ import time
 def main():
     while True:
         print("请选择你需要的功能：")
-        print("1. 解码工具（自动寻找flag）")
+        print("1. 解码工具")
         print("2. 长文本寻找flag")
-
+        print("3. 暴力破解flag(todo)") # 还没做
         choice = input("请输入编号：")
         if choice == "1":
-            c = input("请输入密文:\n")
+            c = input("请输入密文:")
 
-            flag_header = input("请输入flag的前缀（输入回车则默认为flag）：")
+            flag_header = input("请输入flag头（回车则默认为flag）：")
             if flag_header.strip() == "":
                 flag_header = "flag"
             
-            key = input("请输入密钥：（无密码则输入回车）\n")
+            key = input("请输入密钥：（无密码则输入回车）")
             if key.strip() == "":
                 key = None
             
             decoder = Decode(c, key, flag_header)
 
             if not key:
-                choice2 = input("请选择解码方式：1. base64 2. hex 3. binary\n")
+                choice2 = input("请选择解码方式：1. base64 2.base32 3.base85 4. hex 5. binary\n")
                 if choice2 == "1":
                     decoder.base64()
                 elif choice2 == "2":
-                    decoder.hex()
+                    decoder.base32()
                 elif choice2 == "3":
+                    decoder.hex()
+                elif choice2 == "4":
                     decoder.binary()
             else:
                 choice2 = input("请选择解密方式：1. xor\n")
                 if choice2 == "1":
                     decoder.xor()
 
-        if choice == "2":
+        elif choice == "2":
             text = input("请输入文本:\n")
-
-            flag_header = input("请输入flag的前缀（输入回车则默认为flag）：")
+            flag_header = input("请输入flag头（回车则默认为flag）：")
             if flag_header.strip() == "":
                 flag_header = "flag"
             
